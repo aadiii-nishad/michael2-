@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>मेरे Telegram चैनल से जुड़ें</title>
+  <meta name="description" content="हमारे Telegram चैनल से जुड़ें — तुरंत अपडेट्स, एक्सक्लूसिव कंटेंट और कम्युनिटी।">
+  <meta name="theme-color" content="#229ED9">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="मेरे Telegram चैनल से जुड़ें">
+  <meta property="og:description" content="हमारे Telegram चैनल से जुड़ें — तुरंत अपडेट्स, एक्सक्लूसिव कंटेंट और कम्युनिटी।">
+  <meta property="og:image" content="assets/cover.png">
+  <meta property="og:url" content="">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="canonical" href="">
+  <link rel="preconnect" href="https://t.me">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="container">
+    <div class="brand">
+      <img src="assets/telegram.svg" alt="Telegram" class="logo" width="56" height="56">
+      <div>
+        <h1 id="channel-title">आपका चैनल नाम</h1>
+        <p class="muted">@YOUR_CHANNEL_USERNAME</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h2>तुरंत अपडेट्स पाने के लिए चैनल जॉइन करें</h2>
+      <p class="lead">हम रोज़ाना उपयोगी टिप्स, न्यूज़ और एक्सक्लूसिव कंटेंट साझा करते हैं।</p>
+
+      <div class="cta">
+        <!-- Primary: open in app; fallback to web -->
+        <a id="openApp" class="btn primary" href="tg://resolve?domain=YOUR_CHANNEL_USERNAME">Telegram ऐप में खोलें</a>
+        <a id="openWeb" class="btn" href="https://t.me/YOUR_CHANNEL_USERNAME">वेब पर जॉइन करें</a>
+        <button id="copyBtn" class="btn outline" type="button" data-copy="https://t.me/YOUR_CHANNEL_USERNAME">लिंक कॉपी करें</button>
+      </div>
+
+      <ul class="highlights">
+        <li>बिलकुल फ्री</li>
+        <li>स्पैम-फ्री नोटिफिकेशंस</li>
+        <li>कभी भी अनसब्सक्राइब कर सकते हैं</li>
+      </ul>
+    </section>
+
+    <section class="about">
+      <h3>हमारे बारे में</h3>
+      <p>यहाँ अपने चैनल के बारे में 2-3 लाइन लिखें—आप कौन‑सा कंटेंट देते हैं, कितनी बार पोस्ट करते हैं, और
+      यूज़र्स को क्या वैल्यू मिलेगी।</p>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <small>© <span id="year"></span> आपका ब्रांड • यह पेज GitHub Pages पर होस्टेड है</small>
+  </footer>
+
+  <script>
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Copy button
+    const copyBtn = document.getElementById('copyBtn');
+    copyBtn.addEventListener('click', async () => {
+      const link = copyBtn.getAttribute('data-copy');
+      try {
+        await navigator.clipboard.writeText(link);
+        copyBtn.textContent = 'कॉपी हो गया ✓';
+        setTimeout(() => (copyBtn.textContent = 'लिंक कॉपी करें'), 1500);
+      } catch (e) {
+        prompt('इस लिंक को कॉपी करें:', link);
+      }
+    });
+
+    // App-open fallback: if app doesn't open in ~1s, go to web link
+    const openApp = document.getElementById('openApp');
+    openApp.addEventListener('click', (e) => {
+      const webURL = document.getElementById('openWeb').href;
+      const now = Date.now();
+      setTimeout(() => {
+        if (Date.now() - now < 1200) { window.location.href = webURL; }
+      }, 900);
+    });
+  </script>
+</body>
+</html>
